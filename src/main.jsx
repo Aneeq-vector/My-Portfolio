@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { injectSpeedInsights } from '@vercel/speed-insights'
 
+injectSpeedInsights()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <SpeedInsights />
       <App />
     </BrowserRouter>
   </React.StrictMode>,
