@@ -1,0 +1,117 @@
+.dock-navbar {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .dock-navbar {
+    bottom: 20px;
+    width: 95%;
+    max-width: 380px;
+  }
+  .dock-container {
+    width: 100%;
+    padding: 8px 12px;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .dock-item {
+    width: 42px;
+    height: 42px;
+  }
+  .dock-divider { margin: 0 4px; }
+}
+
+.dock-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 10px 16px;
+  border-radius: 24px;
+  background: var(--bg-glass);
+  pointer-events: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  border: none;
+}
+
+.dock-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.dock-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.dock-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  transform: translateY(-5px) scale(1.1);
+}
+
+.dock-item.active {
+  color: var(--brand-neon);
+}
+
+.dock-item.active .dock-icon-wrapper {
+  transform: translateY(-2px);
+}
+
+.dock-indicator {
+  position: absolute;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brand-neon);
+  box-shadow: 0 0 8px var(--brand-neon);
+}
+
+.dock-tooltip {
+  position: absolute;
+  top: -45px;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 4px;
+}

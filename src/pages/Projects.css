@@ -1,0 +1,144 @@
+.projects-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 3.5rem;
+  margin-top: -0.5rem;
+  opacity: 0.8;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem;
+  height: 100%;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.folder-icon {
+  color: var(--brand-neon);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .folder-icon {
+  transform: scale(1.1) rotate(5deg);
+  opacity: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.p-link {
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.p-link:hover {
+  color: var(--brand-neon);
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 5px rgba(14, 165, 233, 0.5));
+}
+
+.project-body {
+  flex-grow: 1;
+}
+
+.project-title {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: var(--brand-neon);
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.project-footer {
+  margin-top: auto;
+  border-top: 1px dashed rgba(255,255,255,0.05);
+  padding-top: 1.5rem;
+}
+
+.repo-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(14, 165, 233, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--brand-neon);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
