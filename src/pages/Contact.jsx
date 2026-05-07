@@ -80,7 +80,7 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className="page-container">
-        <h2 className="section-heading mono-text">MODULE_05 // COMM_LINK</h2>
+        <h2 className="section-heading mono-text">MODULE_05 // CONTACT_ME</h2>
 
         <div className="contact-terminal-container">
           <div className="terminal-header glass">
@@ -102,7 +102,7 @@ export default function Contact() {
 
             <form ref={formRef} onSubmit={handleSubmit} className="contact-form" noValidate>
               <div className="form-group">
-                <label htmlFor="name" className="mono-text">USER_IDENTIFIER :</label>
+                <label htmlFor="name" className="mono-text">YOUR_NAME :</label>
                 <input
                   type="text"
                   id="name"
@@ -117,7 +117,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email" className="mono-text">RETURN_ADDRESS :</label>
+                <label htmlFor="email" className="mono-text">YOUR_EMAIL :</label>
                 <input
                   type="email"
                   id="email"
@@ -132,7 +132,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message" className="mono-text">PAYLOAD_DATA :</label>
+                <label htmlFor="message" className="mono-text">YOUR_MESSAGE :</label>
                 <textarea
                   id="message"
                   name="message"
@@ -140,7 +140,7 @@ export default function Contact() {
                   onChange={handleChange}
                   rows="4"
                   className={`input-field mono-text ${errors.message ? 'input-error' : ''}`}
-                  placeholder="Enter transmission content"
+                  placeholder="Enter your message"
                   disabled={status === 'loading'}
                 ></textarea>
                 {errors.message && <span className="field-error mono-text">{errors.message}</span>}
@@ -152,7 +152,7 @@ export default function Contact() {
                 disabled={status === 'loading'}
               >
                 <span className="btn-text">
-                  {status === 'loading' ? 'TRANSMITTING...' : 'EXECUTE_TRANSMISSION'}
+                  {status === 'loading' ? 'TRANSMITTING...' : 'SEND_MESSAGE'}
                 </span>
                 {status !== 'loading' && <Send size={16} style={{ marginLeft: 8 }} />}
               </button>
