@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       html: `
         <p>Hi ${name},</p>
 
-        <p>Thank you for reaching out through my portfolio website. I truly appreciate your interest and the time you took to contact me.</p>
+        <b><p>Thank you for reaching out through my portfolio website. I truly appreciate your interest and the time you took to contact me.</p></b>
 
         <p>Your message has been received successfully, and I will review it carefully and get back to you as soon as possible.</p>
 
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
           📱 TikTok: https://www.tiktok.com/@mr_xnee
         </p>
 
-        <p>I look forward to connecting with you.</p>
+        <b><p>I look forward to connecting with you.</p></b>
 
         <p>Best regards,<br/>Ahmed Aneeq</p>
       `,
