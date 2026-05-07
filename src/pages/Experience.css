@@ -16,6 +16,7 @@
   font-size: 0.85rem;
   color: var(--text-secondary);
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .log-dots {
@@ -51,6 +52,10 @@
   position: relative;
   padding: 1.5rem 0;
   border-bottom: 1px dashed rgba(255,255,255,0.05);
+  /* Prevent text overflow */
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .log-entry:last-child {
@@ -64,6 +69,7 @@
   gap: 1rem;
   margin-bottom: 1rem;
   font-size: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .status-badge {
@@ -74,6 +80,7 @@
   border-radius: 4px;
   font-weight: 600;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .status-badge.running {
@@ -90,8 +97,9 @@
 
 .log-time {
   color: var(--brand-neon);
-    font-size: 1.2rem;
-    font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 500;
+  word-break: break-word;
 }
 
 .log-role {
@@ -109,6 +117,8 @@
   border-left: 2px solid rgba(14, 165, 233, 0.3);
   padding-left: 1rem;
   opacity: 0.8;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .log-skills {
@@ -150,9 +160,24 @@
   100% { top: 100%; }
 }
 
+/* ── Tablet ── */
 @media (max-width: 768px) {
-  .log-body { padding: 1.5rem; }
-  .log-role { font-size: 1.25rem; }
-  .log-status-bar { flex-wrap: wrap; gap: 0.5rem; }
+  .sys-logs-container { margin-top: 2rem; }
+  .log-body {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+  .log-header { padding: 10px 16px; font-size: 0.8rem; }
+  .log-role { font-size: 1.1rem; }
+  .log-status-bar { gap: 0.5rem; }
   .log-skills { gap: 0.5rem; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .log-body { padding: 1.2rem 1rem; }
+  .log-time { font-size: 1rem; }
+  .log-role { font-size: 1rem; }
+  .log-output { font-size: 0.88rem; }
+  .log-skill-tag { font-size: 0.75rem; padding: 3px 8px; }
 }

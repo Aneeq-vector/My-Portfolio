@@ -16,6 +16,7 @@
   font-size: 0.85rem;
   color: var(--text-secondary);
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .term-actions {
@@ -46,6 +47,7 @@
   line-height: 1.8;
   color: var(--text-secondary);
   font-size: 0.9rem;
+  word-break: break-word;
 }
 
 .contact-form {
@@ -57,7 +59,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .form-group label {
@@ -75,6 +77,8 @@
   outline: none;
   transition: all 0.3s ease;
   resize: vertical;
+  /* Prevent iOS zoom on focus */
+  font-size: 1rem;
 }
 
 .input-field:focus {
@@ -93,6 +97,18 @@
   cursor: not-allowed;
 }
 
+.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.15) !important;
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: #ef4444;
+  margin-top: 2px;
+  padding-left: 2px;
+}
+
 .submit-btn {
   margin-top: 1rem;
   width: 100%;
@@ -101,6 +117,8 @@
   font-family: var(--font-mono);
   font-size: 0.9rem;
   letter-spacing: 0.05em;
+  /* Minimum tap target size */
+  min-height: 52px;
 }
 
 .submit-btn.loading {
@@ -120,12 +138,14 @@
   background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  z-index: 1000;
+  z-index: 1001;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   border: 1px solid var(--border-color);
+  max-width: calc(100vw - 80px);
+  word-break: break-word;
 }
 
 .toast.success {
@@ -139,6 +159,38 @@
 }
 
 @media (max-width: 768px) {
-  .terminal-body { padding: 1.5rem; }
-  .toast { right: 20px; left: 20px; bottom: 100px; justify-content: center; }
+  .contact-terminal-container {
+    margin-top: 2rem;
+  }
+  .terminal-header {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+  .terminal-body {
+    padding: 1.5rem 1.2rem;
+  }
+  .term-intro {
+    font-size: 0.82rem;
+  }
+  .submit-btn {
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+  }
+  .toast {
+    right: 16px;
+    left: 16px;
+    bottom: 100px;
+    justify-content: center;
+    font-size: 0.8rem;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-body {
+    padding: 1.2rem 1rem;
+  }
+  .input-field {
+    padding: 0.85rem 1rem;
+  }
 }

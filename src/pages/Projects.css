@@ -4,6 +4,8 @@
   margin-bottom: 3.5rem;
   margin-top: -0.5rem;
   opacity: 0.8;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .projects-grid {
@@ -17,6 +19,10 @@
   flex-direction: column;
   padding: 2.2rem;
   height: 100%;
+  /* Prevent text overflow in cards */
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .project-header {
@@ -30,6 +36,7 @@
   color: var(--brand-neon);
   opacity: 0.8;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .project-card:hover .folder-icon {
@@ -45,6 +52,13 @@
 .p-link {
   color: var(--text-secondary);
   transition: all 0.3s ease;
+  /* Minimum tap target */
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 .p-link:hover {
@@ -55,6 +69,7 @@
 
 .project-body {
   flex-grow: 1;
+  min-width: 0;
 }
 
 .project-title {
@@ -64,6 +79,8 @@
   text-transform: capitalize;
   letter-spacing: -0.02em;
   transition: color 0.3s ease;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .project-card:hover .project-title {
@@ -76,6 +93,8 @@
   line-height: 1.6;
   margin-bottom: 2rem;
   opacity: 0.8;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .project-footer {
@@ -90,6 +109,7 @@
   margin-bottom: 1rem;
   color: var(--text-muted);
   font-size: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .stat-item {
@@ -135,10 +155,21 @@
   to { transform: rotate(360deg); }
 }
 
+/* ── Tablet: 2 columns ── */
 @media (max-width: 1024px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
 
+/* ── Mobile: 1 column ── */
 @media (max-width: 640px) {
-  .projects-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .project-card { padding: 1.5rem; }
+  .project-header { margin-bottom: 1.2rem; }
+  .project-title { font-size: 1.2rem; }
+  .project-desc { font-size: 0.85rem; margin-bottom: 1.2rem; }
+  .projects-subtitle { margin-bottom: 2rem; font-size: 0.88rem; }
+}
+
+@media (max-width: 480px) {
+  .project-card { padding: 1.2rem 1rem; }
 }

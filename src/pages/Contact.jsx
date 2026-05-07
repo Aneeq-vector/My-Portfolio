@@ -1,27 +1,64 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import PageTransition from '../components/PageTransition';
 import { Send, Terminal, CheckCircle2, AlertCircle } from 'lucide-react';
 import './Contact.css';
 
 export default function Contact() {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required.';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email.';
+    }
+    if (!formData.message.trim()) newErrors.message = 'Message is required.';
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setErrors({});
     setStatus('loading');
-    
-    // Simulating terminal transmission delay
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 4000);
-    }, 2000);
+
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+      .then(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      })
+      .catch(() => {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      });
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: undefined });
+    }
   };
 
   return (
@@ -47,7 +84,7 @@ export default function Contact() {
               &gt; Awaiting user payload...
             </p>
 
-            <form onSubmit={handleSubmit} className="contact-form">
+            <form ref={formRef} onSubmit={handleSubmit} className="contact-form" noValidate>
               <div className="form-group">
                 <label htmlFor="name" className="mono-text">USER_IDENTIFIER :</label>
                 <input
@@ -56,11 +93,11 @@ export default function Contact() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  required
-                  className="input-field mono-text"
+                  className={`input-field mono-text ${errors.name ? 'input-error' : ''}`}
                   placeholder="Enter your name"
                   disabled={status === 'loading'}
                 />
+                {errors.name && <span className="field-error mono-text">{errors.name}</span>}
               </div>
 
               <div className="form-group">
@@ -71,11 +108,11 @@ export default function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  className="input-field mono-text"
+                  className={`input-field mono-text ${errors.email ? 'input-error' : ''}`}
                   placeholder="Enter your email"
                   disabled={status === 'loading'}
                 />
+                {errors.email && <span className="field-error mono-text">{errors.email}</span>}
               </div>
 
               <div className="form-group">
@@ -85,12 +122,12 @@ export default function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   rows="4"
-                  className="input-field mono-text"
+                  className={`input-field mono-text ${errors.message ? 'input-error' : ''}`}
                   placeholder="Enter transmission content"
                   disabled={status === 'loading'}
                 ></textarea>
+                {errors.message && <span className="field-error mono-text">{errors.message}</span>}
               </div>
 
               <button 
@@ -116,7 +153,7 @@ export default function Contact() {
               className="toast success mono-text"
             >
               <CheckCircle2 size={20} />
-              TRANSMISSION SUCCESSFUL.
+              Message sent successfully. I will get back to you soon.
             </motion.div>
           )}
           {status === 'error' && (
@@ -127,7 +164,7 @@ export default function Contact() {
               className="toast error mono-text"
             >
               <AlertCircle size={20} />
-              TRANSMISSION FAILED.
+              Something went wrong. Please try again.
             </motion.div>
           )}
         </AnimatePresence>

@@ -36,10 +36,10 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  left: -2px; /* Center circle on 2px line based on padding 2rem (32px), left: 36px - 18px = 18px vs 0 => left: 36-32+.. adjusting: */
   left: -15px; 
   z-index: 2;
   box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+  flex-shrink: 0;
 }
 
 .pulse-icon {
@@ -55,6 +55,10 @@
   flex: 1;
   margin-left: 4rem;
   padding: 2.5rem;
+  /* prevent text overflow */
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .panel-header {
@@ -70,6 +74,8 @@
   color: var(--text-primary);
   line-height: 1.4;
   letter-spacing: -0.01em;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .edu-status {
@@ -80,6 +86,7 @@
   padding: 4px 12px;
   border-radius: 4px;
   border: 1px solid rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
 }
 
 .edu-institute {
@@ -87,6 +94,7 @@
   font-weight: 500;
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
+  word-break: break-word;
 }
 
 .edu-metrics {
@@ -95,6 +103,7 @@
   margin-top: 1rem;
   border-top: 1px dashed rgba(255,255,255,0.05);
   padding-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .metric-badge {
@@ -108,11 +117,33 @@
   color: var(--text-secondary);
 }
 
+/* ── Tablet ── */
 @media (max-width: 768px) {
-  .edu-timeline-container { padding-left: 0; }
+  .edu-timeline-container {
+    padding-left: 0;
+    margin-top: 2.5rem;
+  }
   .cyber-line { left: 16px; }
   .edu-pointer { left: -3px; width: 32px; height: 32px; }
-  .edu-panel { margin-left: 3rem; padding: 1.5rem; }
-  .panel-header { flex-direction: column; }
-  .edu-title { font-size: 1.25rem; }
+  .edu-panel {
+    margin-left: 3rem;
+    padding: 1.5rem;
+  }
+  .panel-header { flex-direction: column; gap: 0.5rem; }
+  .edu-title { font-size: 1.2rem; }
+  .edu-institute { font-size: 1rem; margin-bottom: 1rem; }
+  .edu-node { margin-bottom: 3rem; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .edu-panel {
+    margin-left: 2.5rem;
+    padding: 1.2rem 1rem;
+  }
+  .edu-title { font-size: 1.05rem; }
+  .edu-status { font-size: 0.78rem; padding: 4px 8px; }
+  .metric-badge { font-size: 0.78rem; padding: 5px 10px; }
+  .edu-pointer { width: 28px; height: 28px; left: -2px; }
+  .edu-node { margin-bottom: 2.5rem; }
 }

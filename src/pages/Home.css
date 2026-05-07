@@ -43,6 +43,7 @@
   width: 8px; height: 8px; background-color: var(--brand-alert);
   border-radius: 50%; box-shadow: 0 0 10px var(--brand-alert);
   animation: pulse-status 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
 @keyframes pulse-status {
@@ -58,9 +59,10 @@
 .hero-description {
   font-size: 1rem; color: var(--text-secondary); margin-bottom: 3rem;
   max-width: 580px; line-height: 1.8; letter-spacing: 0.02em;
+  word-break: break-word;
 }
 
-.hero-actions { display: flex; gap: 1.5rem; }
+.hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
 /* Hologram */
 .hologram-wrapper {
@@ -135,6 +137,9 @@
 .chip-2 { bottom: 20%; left: -5%; }
 .chip-3 { top: 75%; right: -10%; }
 
+/* Hidden mobile utility */
+.hidden-mobile { display: inline; }
+
 @media (max-width: 1024px) {
   .hero-heading { font-size: 3.2rem; }
   .hologram-wrapper { transform: scale(0.85); }
@@ -147,10 +152,24 @@
     justify-content: center;
     align-items: center;
     padding-top: 2rem; 
-    gap: 4rem; 
+    gap: 2rem;
+    /* prevent horizontal overflow */
+    overflow-x: hidden;
+  }
+  .home-content {
+    max-width: 100%;
+    width: 100%;
   }
   .status-bars, .hero-actions {
     justify-content: center;
+  }
+  .hero-actions {
+    gap: 1rem;
+  }
+  .hero-actions a {
+    flex: 1 1 140px;
+    text-align: center;
+    min-height: 48px;
   }
   .hologram-wrapper { 
     transform: scale(0.65); 
@@ -160,4 +179,16 @@
   .hero-heading { font-size: 2.8rem; }
   .hero-description { margin-left: auto; margin-right: auto; }
   .floating-chip { display: none; } /* Hide chips on mobile to save space */
+  .hidden-mobile { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-heading { font-size: 2.2rem; }
+  .hero-description { font-size: 0.9rem; margin-bottom: 2rem; }
+  .badge { font-size: 0.72rem; padding: 6px 12px; }
+  .status-bars { gap: 0.6rem; }
+  .hologram-wrapper {
+    transform: scale(0.55);
+    margin-bottom: -180px;
+  }
 }

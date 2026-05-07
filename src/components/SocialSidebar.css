@@ -9,6 +9,7 @@
   z-index: 100;
 }
 
+/* Only show on large screens where it won't overlap content */
 @media (min-width: 1024px) {
   .social-sidebar {
     display: flex;
@@ -24,10 +25,12 @@
   border-radius: 50%;
   background: var(--bg-glass);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  touch-action: manipulation;
 }
 
 .social-icon-wrapper:hover {

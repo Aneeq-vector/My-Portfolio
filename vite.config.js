@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
+import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -16,15 +16,17 @@ export default defineConfig({
     }),
   ],
   build: {
-    // Reduce chunk size
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor libraries (~200KB)
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // Other deps
-          'axios': ['axios'],
-          'motion': ['motion']
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion';
+            }
+          }
         }
       }
     }
