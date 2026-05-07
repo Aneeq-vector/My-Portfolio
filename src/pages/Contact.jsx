@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import PageTransition from '../components/PageTransition';
 import { Send, Terminal, CheckCircle2, AlertCircle } from 'lucide-react';
 import './Contact.css';
@@ -9,55 +8,70 @@ export default function Contact() {
   const formRef = useRef(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [status, setStatus] = useState('idle');
 
   const validate = () => {
     const newErrors = {};
+
     if (!formData.name.trim()) newErrors.name = 'Name is required.';
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email.';
     }
+
     if (!formData.message.trim()) newErrors.message = 'Message is required.';
+
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
+
     setErrors({});
     setStatus('loading');
 
-   emailjs.send(
-  "service_1c1xdir",
-  "template_fbajb4v",
-  {
-    from_name: formData.name,
-    from_email: formData.email,
-    message: formData.message,
-  },
-  "xbJ9TOvgQvzw9jM2"
-)
-      .then(() => {
+    try {
+      const response = await fetch('YOUR_FORMSPREE_ENDPOINT_HERE', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
-      })
-      .catch((error) => {
-        console.log("EmailJS Error:", error);
-
+      } else {
+        console.log('Formspree Error:', await response.json());
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
-    });
+      }
+    } catch (error) {
+      console.log('Formspree Error:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: undefined });
     }
@@ -78,11 +92,11 @@ export default function Contact() {
               <span className="term-btn close"></span>
             </div>
           </div>
-          
+
           <div className="terminal-body glass-card">
             <p className="term-intro mono-text">
-              <span className="text-neon">root@aneeq.dev:~#</span> ./init_connection.sh<br/>
-              &gt; Establishing secure connection... [OK]<br/>
+              <span className="text-neon">root@aneeq.dev:~#</span> ./init_connection.sh<br />
+              &gt; Establishing secure connection... [OK]<br />
               &gt; Awaiting user payload...
             </p>
 
@@ -132,8 +146,8 @@ export default function Contact() {
                 {errors.message && <span className="field-error mono-text">{errors.message}</span>}
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={`btn-primary submit-btn ${status === 'loading' ? 'loading' : ''}`}
                 disabled={status === 'loading'}
               >
@@ -158,6 +172,7 @@ export default function Contact() {
               Message sent successfully. I will get back to you soon.
             </motion.div>
           )}
+
           {status === 'error' && (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
