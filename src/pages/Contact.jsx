@@ -33,16 +33,16 @@ export default function Contact() {
     setErrors({});
     setStatus('loading');
 
-    emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-      },
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
+   emailjs.send(
+  "service_0r93n2a",
+  "template_fbajb4v",
+  {
+    from_name: formData.name,
+    from_email: formData.email,
+    message: formData.message,
+  },
+  "xbJ9TOvgQvzw9jM2"
+)
       .then(() => {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
