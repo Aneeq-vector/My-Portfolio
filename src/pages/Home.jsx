@@ -76,7 +76,7 @@ export default function Home() {
           <div className="hologram-ring reverse"></div>
           
           <div className="hologram-core">
-            <img src="/profile.png" alt="Aneeq" className="cyber-profile" />
+            <img src="/profile.webp" alt="Aneeq" className="cyber-profile" />
             <div className="scan-line"></div>
           </div>
 
