@@ -9,13 +9,58 @@
   z-index: 100;
 }
 
-/* Only show on large screens where it won't overlap content */
+/* ── Desktop: vertical sidebar on left ── */
 @media (min-width: 1024px) {
   .social-sidebar {
     display: flex;
   }
 }
 
+/* ── Mobile / Tablet: horizontal pill row above the dock ── */
+@media (max-width: 1023px) {
+  .social-sidebar {
+    display: flex;
+    flex-direction: row;
+    left: 50%;
+    bottom: 92px;      /* sit above the dock navbar (~76px tall + 16px gap) */
+    transform: translateX(-50%);
+    gap: 0.6rem;
+    padding: 8px 14px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    /* never wider than the screen */
+    max-width: calc(100vw - 32px);
+  }
+
+  .social-sidebar .social-line {
+    display: none;
+  }
+
+  .social-sidebar .social-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* ── Very small phones: shrink icons a bit more ── */
+@media (max-width: 380px) {
+  .social-sidebar {
+    gap: 0.4rem;
+    padding: 6px 10px;
+    bottom: 88px;
+  }
+
+  .social-sidebar .social-icon-wrapper {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ── Shared icon styles ── */
 .social-icon-wrapper {
   display: flex;
   align-items: center;

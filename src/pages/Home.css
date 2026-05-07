@@ -3,13 +3,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  
-  /* Make Home structurally independent so it centers precisely in the viewport */
   min-height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
-  padding-bottom: 80px; /* Offset the dock visually */
+  padding-bottom: 80px;
 }
 
 .home-content {
@@ -47,27 +45,43 @@
 }
 
 @keyframes pulse-status {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70%  { transform: scale(1.1);  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .hero-heading {
-  font-size: 3.8rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.1;
+  font-size: 3.8rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .hero-description {
-  font-size: 1rem; color: var(--text-secondary); margin-bottom: 3rem;
-  max-width: 580px; line-height: 1.8; letter-spacing: 0.02em;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  max-width: 580px;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
   word-break: break-word;
 }
 
-.hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
 
-/* Hologram */
+/* ── Hologram ── */
 .hologram-wrapper {
-  flex: 1; display: flex; justify-content: center; align-items: center;
-  position: relative; z-index: 1; perspective: 1000px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  perspective: 1000px;
 }
 
 .hologram-ring {
@@ -88,7 +102,7 @@
   animation: spinRingReverse 25s linear infinite;
 }
 
-@keyframes spinRing { to { transform: rotate(360deg); } }
+@keyframes spinRing        { to { transform: rotate(360deg);  } }
 @keyframes spinRingReverse { to { transform: rotate(-360deg); } }
 
 .hologram-core {
@@ -137,58 +151,114 @@
 .chip-2 { bottom: 20%; left: -5%; }
 .chip-3 { top: 75%; right: -10%; }
 
-/* Hidden mobile utility */
 .hidden-mobile { display: inline; }
 
+/* ── Tablet ── */
 @media (max-width: 1024px) {
   .hero-heading { font-size: 3.2rem; }
   .hologram-wrapper { transform: scale(0.85); }
 }
 
+/* ── Mobile: stack content on top, hologram below, NO negative-margin hack ── */
 @media (max-width: 768px) {
-  .home-container { 
-    flex-direction: column; 
-    text-align: center; 
-    justify-content: center;
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+    justify-content: flex-start;
     align-items: center;
-    padding-top: 2rem; 
-    gap: 2rem;
-    /* prevent horizontal overflow */
+    /* extra top padding so dock-navbar doesn't clip content at top */
+    padding-top: 3rem;
+    /* extra bottom padding: dock (~76px) + social bar (~52px) + gap */
+    padding-bottom: 160px;
+    gap: 3rem;
     overflow-x: hidden;
+    /* let the page scroll naturally — no forced full-vh on mobile */
+    min-height: unset;
   }
+
   .home-content {
     max-width: 100%;
     width: 100%;
   }
+
   .status-bars, .hero-actions {
     justify-content: center;
   }
+
   .hero-actions {
     gap: 1rem;
   }
+
   .hero-actions a {
     flex: 1 1 140px;
     text-align: center;
     min-height: 48px;
   }
-  .hologram-wrapper { 
-    transform: scale(0.65); 
-    transform-origin: top center; 
-    margin-bottom: -150px; /* Compensate for visual scale taking less height than DOM block */
+
+  /* ── Size the hologram directly — no scale() transform ── */
+  .hologram-wrapper {
+    transform: none;
+    width: 260px;
+    height: 260px;
+    flex: none;
+    margin: 0 auto;
   }
+
+  .hologram-ring {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hologram-ring.reverse {
+    width: 270px;
+    height: 270px;
+  }
+
+  .hologram-core {
+    width: 210px;
+    height: 210px;
+  }
+
+  .cyber-profile {
+    width: 210px;
+    height: 210px;
+  }
+
   .hero-heading { font-size: 2.8rem; }
   .hero-description { margin-left: auto; margin-right: auto; }
-  .floating-chip { display: none; } /* Hide chips on mobile to save space */
+  .floating-chip { display: none; }
   .hidden-mobile { display: none; }
 }
 
+/* ── Small mobile ── */
 @media (max-width: 480px) {
   .hero-heading { font-size: 2.2rem; }
   .hero-description { font-size: 0.9rem; margin-bottom: 2rem; }
   .badge { font-size: 0.72rem; padding: 6px 12px; }
   .status-bars { gap: 0.6rem; }
+
   .hologram-wrapper {
-    transform: scale(0.55);
-    margin-bottom: -180px;
+    width: 210px;
+    height: 210px;
+  }
+
+  .hologram-ring {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hologram-ring.reverse {
+    width: 218px;
+    height: 218px;
+  }
+
+  .hologram-core {
+    width: 170px;
+    height: 170px;
+  }
+
+  .cyber-profile {
+    width: 170px;
+    height: 170px;
   }
 }
