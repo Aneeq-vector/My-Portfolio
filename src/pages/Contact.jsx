@@ -34,7 +34,7 @@ export default function Contact() {
     setStatus('loading');
 
    emailjs.send(
-  "service_0r93n2a",
+  "service_1c1xdir",
   "template_fbajb4v",
   {
     from_name: formData.name,
@@ -50,7 +50,7 @@ export default function Contact() {
       })
       .catch((error) => {
         console.log("EmailJS Error:", error);
-        
+
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
     });
