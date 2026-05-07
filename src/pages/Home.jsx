@@ -26,9 +26,9 @@ export default function Home() {
   return (
     <PageTransition>
       <div className="home-container">
-        
+
         {/* Left Content (Command Intro) */}
-        <motion.div 
+        <motion.div
           className="home-content"
           variants={containerStagger}
           initial="hidden"
@@ -44,17 +44,17 @@ export default function Home() {
               {time.toLocaleTimeString([], { hour12: false })}
             </div>
           </motion.div>
-          
+
           <motion.h1 className="hero-heading" variants={textStagger}>
             Building Intelligent <br className="hidden-mobile" />
             Digital <span className="gradient-text">Systems</span>
           </motion.h1>
-          
+
           <motion.p className="hero-description mono-text" variants={textStagger}>
-            &gt; I’m Aneeq. Transforming complex problems into elegant solutions. 
+            &gt; I’m Aneeq. Transforming complex problems into elegant solutions.
             <br />&gt; Full-stack capabilities with precision architecture.
           </motion.p>
-          
+
           <motion.div className="hero-actions" variants={textStagger}>
             <NavLink to="/projects" className="btn-primary">
               <span className="btn-text">projects</span> <Zap size={16} style={{ marginLeft: 8 }} />
@@ -66,7 +66,7 @@ export default function Home() {
         </motion.div>
 
         {/* Right Content (Holographic Panel) */}
-        <motion.div 
+        <motion.div
           className="hologram-wrapper"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -74,7 +74,7 @@ export default function Home() {
         >
           <div className="hologram-ring"></div>
           <div className="hologram-ring reverse"></div>
-          
+
           <div className="hologram-core">
             <img src="/profile.webp" alt="Aneeq" className="cyber-profile" />
             <div className="scan-line"></div>
