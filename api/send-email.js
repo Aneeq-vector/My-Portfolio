@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       to: email,
       subject: "Thank You for Contacting Me",
       html: `
-        <p>Hi <b>${name}</b>,</p>
+        <p>Hi </p> <p><b>${name}</b></p>
 
         <p>Thank you for reaching out through my portfolio website. I truly appreciate your interest and the time you took to contact me.</p>
 
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
         <p>I look forward to connecting with you.</p>
 
         <p>Best regards,<br/>Ahmed Aneeq</p>
-      ,
+      `,
     });
 
     return res.status(200).json({ message: "Email sent successfully" });
