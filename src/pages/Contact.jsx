@@ -48,10 +48,12 @@ export default function Contact() {
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log("EmailJS Error:", error);
+        
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
-      });
+    });
   };
 
   const handleChange = (e) => {
