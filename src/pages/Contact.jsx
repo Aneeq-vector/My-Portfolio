@@ -40,11 +40,10 @@ export default function Contact() {
     setStatus('loading');
 
     try {
-      const response = await fetch('https://formspree.io/f/xpqbjqna', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
@@ -58,12 +57,13 @@ export default function Contact() {
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
-        console.log('Formspree Error:', await response.json());
+        const errorData = await response.json();
+        console.log('Email API Error:', errorData);
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       }
     } catch (error) {
-      console.log('Formspree Error:', error);
+      console.log('Email API Error:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
