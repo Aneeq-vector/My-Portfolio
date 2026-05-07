@@ -51,9 +51,11 @@ export default async function handler(req, res) {
 
         <p>
           📧 Email: ahmedaneeq.official@gmail.com<br/>
-          💼 LinkedIn: https://linkedin.com/in/yourprofile<br/>
+          📱 WhatsApp/Call: https://wa.me/+94710900155<br/>
+          💼 LinkedIn: https://www.linkedin.com/in/ahmed-aneeq-b8b073325/<br/>
           🐙 GitHub: https://github.com/Aneeq-vector<br/>
-          📸 Instagram: https://instagram.com/neeq.dev
+          📸 Instagram: https://instagram.com/neeq.dev<br/>
+          📱 TikTok: https://www.tiktok.com/@mr_xnee
         </p>
 
         <p>I look forward to connecting with you.</p>
